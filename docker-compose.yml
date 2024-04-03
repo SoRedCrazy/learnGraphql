@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  back:
+    container_name: back
+    build: ./backdb
+    restart: always
+    ports:
+     - "4000:4000"
+    links:
+      - mongobuy
+    environment:
+      - URLDB=mongodb://mongobuy:27017/back
+
+  mongobuy:
+    image: mongo:4.0
+    restart: always
+    volumes:
+      - "./mongo/data:/data/dbback"
